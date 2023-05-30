@@ -8,6 +8,10 @@
       <h3 style="color: red;">Affichage des patients et de leur rendez-vous par Praticien</h3><br/>
       <?php 
         $currentUser = $_SESSION['currentUser'];
+        if($currentUser=="vide"){
+            echo "<p>Vous devez être administrateur pour voir ces données confidentielles</p></br>";
+        }
+        else{    
         $valeur = $currentUser[0]->getStatut();
         if($valeur == 0){
             echo "<p>Ici on va avoir la liste des des patients et de leur rendez-vous group by le praticien responsable du rendez-vous. Pour faire ca Nous utilisons du renommage en sql pour afficher des inforamtions distincts du meme table. Ensuite pour clarifier grandement le resultat nous n'affichons pas les informations déjà aficher sur une ligne précedente. </p></br>";
@@ -77,6 +81,8 @@
         }
         else{
             echo "<p>Vous devez être administrateur pour voir ces données confidentielles</p></br>";
+        }
+                    
         }
             
                 ?>

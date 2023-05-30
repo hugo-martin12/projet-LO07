@@ -46,6 +46,7 @@ class ControllerConnexion {
    echo ("ControllerConnexion : connexionInscription : vue = $vue"); 
   require ($vue);
  }
+ 
  public static function connexionInscrit() {
   session_start();
   

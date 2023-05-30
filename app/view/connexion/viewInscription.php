@@ -1,6 +1,4 @@
-<?php 
-require ($root . '/app/view/fragment/fragmentDoctolibHeader.html');
-?>
+
 <?php require ($root . '/app/view/fragment/fragmentDoctolibHeader.html');?>
 <body>
   <div class="container">
