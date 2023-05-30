@@ -36,7 +36,7 @@ require ($root . '/app/view/fragment/fragmentDoctolibHeader.html');
             ?>
             </select> 
       </div>
-      <p/><br/>
+      <br/>
       <button class="btn btn-primary" type="submit">submit</button>
     </form>
     <p/>

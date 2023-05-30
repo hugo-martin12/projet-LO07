@@ -31,7 +31,7 @@ switch ($action) {
  case "praticienListePatients" :
   ControllerPraticien::$action();
   break;
- case "initialisation" :
+ case "fonctionnaliteOriginale" :
   ControllerDoctolib::$action();
   break; 
 
