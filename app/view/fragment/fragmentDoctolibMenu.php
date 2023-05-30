@@ -50,7 +50,11 @@
            echo "<li class=\"nav-item dropdown\">";
            echo "<a class=\"nav-link dropdown-toggle\" role=\"button\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">praticien</a>";
            echo"<ul class=\"dropdown-menu\">";
-                echo"<li><a class=\"dropdown-item\" href='router2.php?action=?'>???</a></li>";
+                echo"<li><a class=\"dropdown-item\" href='router2.php?action=praticienListeDispo'>Liste de mes disponibilités</a></li>";
+                echo"<li><a class=\"dropdown-item\" href='router2.php?action=praticienDispoInsert'>Ajout de nouvelles disponibilités</a></li>";
+                echo"<li><hr class=\"dropdown-divider\"></li>";
+                echo"<li><a class=\"dropdown-item\" href='router2.php?action=praticienListeRDV'>Liste des rendez-vous avec le nom des patients</a></li>";
+                echo"<li><a class=\"dropdown-item\" href='router2.php?action=praticienListePatients'>Liste de mes patients (sans doublon)</a></li>";
            echo "</ul>";
            echo "</li>";
         }

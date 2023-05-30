@@ -1,7 +1,7 @@
 <!-- ----- debut router -->
 <?php
 require ('../controller/ControllerDoctolib.php');
-
+require ('../controller/ControllerPraticien.php');
 require ('../controller/ControllerConnexion.php');
 
 // --- récupération de l'action passée dans l'URL
@@ -20,8 +20,16 @@ switch ($action) {
  case "connexionLogin" :
  case "connexionLogined" :
  case "connexionInscription" :
+ case "connexionInscrit" :
  case "connexionDeconnexion" :
   ControllerConnexion::$action();
+  break;
+ case "praticienListeDispo" :
+ case "praticienDispoInsert" :
+ case "praticienDispoInserted" :
+ case "praticienListeRDV" :
+ case "praticienListePatients" :
+  ControllerPraticien::$action();
   break;
  case "initialisation" :
   ControllerDoctolib::$action();

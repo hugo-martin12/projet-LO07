@@ -5,8 +5,11 @@
       include $root . '/app/view/fragment/fragmentDoctolibMenu.php';
       include $root . '/app/view/fragment/fragmentDoctolibJumbotron.html';
       ?>
-      <p>Problème le login n'existe pas dans la base de donnée</p></br>
-    <p/>
+      <p>Problème : le login est déjà utilisé. Veuillez changer votre login</p></br>
+      <form role="form" method='get' action='router2.php'>
+        <input type="hidden" name='action' value='connexionInscription'>
+      <button class="btn btn-primary" type="submit">revenir en arrière</button>
+    </form>
   </div>
 
   <?php include $root . '/app/view/fragment/fragmentDoctolibFooter.html'; ?>

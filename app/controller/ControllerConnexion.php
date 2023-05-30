@@ -17,7 +17,6 @@ class ControllerConnexion {
  }
   public static function connexionLogined() {
    session_start();
-   echo $_SESSION['login'];
    $login = $_GET['login'];
    $password = $_GET['password'];
    $existe = ModelPersonne::ifExisteLogin($login,$password);
@@ -44,7 +43,42 @@ class ControllerConnexion {
   include 'config.php';
   $vue = $root . 'app/view/connexion/viewInscription.php';
   if (DEBUG)
-   echo ("ControllerConnexion : conexionInscription : vue = $vue"); 
+   echo ("ControllerConnexion : connexionInscription : vue = $vue"); 
+  require ($vue);
+ }
+ public static function connexionInscrit() {
+  session_start();
+  
+  $nom = $_GET['nom'];
+  $prenom = $_GET['prenom'];
+  $adresse = $_GET['adresse']; 
+  $login = $_GET['login']; 
+  $password = $_GET['password']; 
+  $statut = $_GET['statut'];
+  $specialite_id = $_GET['specialite_id'];   
+  $existe = ModelPersonne::ifExisteLogin($login,$password);
+  $statut = intval($statut);
+  $specialite_id = intval($specialite_id); 
+
+  
+   if($existe){
+       include 'config.php';
+       $vue = $root . 'app/view/connexion/viewFailInscription.php';
+   }
+   else{
+       $results = ModelPersonne::InsertPersonne($nom, $prenom, $adresse, $login, $password, $statut,$specialite_id);
+       $specialite_id = ModelSpecialite::getSpecialiteToId($specialite_id);
+       $specialite_id = $specialite_id[0]->getLabel();
+       
+       if($statut==0){$sta = "administrateur";}
+       if($statut==1){$sta = "praticien";}
+       if($statut==2){$sta = "patient";}
+       
+       include 'config.php';
+       $vue = $root . 'app/view/connexion/viewInscrit.php';
+   }
+  if (DEBUG)
+   echo ("ControllerConnexion : connexionInscrit : vue = $vue"); 
   require ($vue);
  }
  

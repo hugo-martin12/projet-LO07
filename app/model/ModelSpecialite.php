@@ -36,6 +36,23 @@ class ModelSpecialite {
      return NULL;
     }
  }
+    public static function getSpecialiteToId($specialite_id) {
+        try {
+         $database = Model::getInstance();
+         
+         $query = "select label from specialite where id = :specialite_id;";
+         $statement = $database->prepare($query);
+         $statement->execute([
+           'specialite_id' => $specialite_id
+         ]);
+         $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelSpecialite");
+         return $results;
+        } catch (PDOException $e) {
+         printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+         return NULL;
+        }
+     }
+ 
 
 }
 ?>

@@ -69,7 +69,7 @@ class ModelPersonne {
     public static function getPersonneToId($id) {
     try {
      $database = Model::getInstance();
-     $query = "select nom,prenom,statut from personne where id = :id;";
+     $query = "select id,nom,prenom,statut from personne where id = :id;";
      $statement = $database->prepare($query);
      $statement->execute([
         'id' => $id
@@ -104,6 +104,37 @@ class ModelPersonne {
      return NULL;
     }
  }
+ 
+ public static function InsertPersonne($nom, $prenom, $adresse, $login, $password, $statut,$specialite_id) {
+        try {
+         $database = Model::getInstance();
+
+         // recherche de la valeur de la clé = max(id) + 1
+         $query = "select max(id) from personne";
+         $statement = $database->query($query);
+         $tuple = $statement->fetch();
+         $id = $tuple['0'];
+         $id++;
+         // ajout d'un nouveau tuple;
+         $query = "insert into personne value (:id,:nom, :prenom, :adresse, :login, :password, :statut,:specialite_id)";
+         $statement = $database->prepare($query);
+         $statement->execute([
+           'id' => $id,
+           'nom' => $nom,
+           'prenom' => $prenom,
+           'adresse'=>$adresse,
+           'login' => $login,
+           'password' => $password,
+           'statut' => $statut,
+           'specialite_id' => $specialite_id
+         ]);
+         return $id;
+        } 
+        catch (PDOException $e) {
+         printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+         return -1;
+        }
+       }
 
 }
 ?>
