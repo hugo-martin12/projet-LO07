@@ -38,6 +38,20 @@ class ModelRendezvous {
     return $this->rdv_date;
     }
 
+    public static function getAll() {
+        try {
+         $database = Model::getInstance();
+         $query = "SELECT rendezvous.id, rendezvous.rdv_date, p1.nom, p1.prenom, p2.nom, p2.prenom FROM rendezvous, personne AS p1, personne AS p2 WHERE rendezvous.patient_id = p1.id AND rendezvous.praticien_id=p2.id AND rendezvous.patient_id<>0";
+         $statement = $database->prepare($query);
+         $statement->execute();
+         $results = $statement->fetchAll();
+         return $results;
+        } 
+        catch (PDOException $e) {
+         printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+         return NULL;
+        }
+     }
     
     public static function getListDispoToId($id_praticien) {
         try {
@@ -139,6 +153,20 @@ class ModelRendezvous {
         } catch (PDOException $e) {
          printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
          return -1;
+        }
+       }
+       
+       public static function addRdv($id_rdv, $id_patient) {
+           try {
+            $database = Model::getInstance();
+            $query = "UPDATE rendezvous SET patient_id = :id_patient WHERE id = :id_rdv;";
+            $statement = $database->prepare($query);
+            $statement->execute([
+                'id_rdv' => $id_rdv,
+                'id_patient' => $id_patient,
+            ]);
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
         }
        }
      

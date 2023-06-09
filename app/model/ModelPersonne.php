@@ -5,6 +5,10 @@ require_once 'Model.php';
 class ModelPersonne {
  private $id, $nom, $prenom, $adresse, $login, $password, $statut,$specialite_id;
  
+ const ADMINISTRATEUR = 0;
+ const PRACTICIEN = 1;
+ const PATIENT = 2;
+ 
  public function __construct($id = NULL,$nom= NULL, $prenom= NULL, $adresse= NULL, $login= NULL, $password= NULL, $statut= NULL,$specialite_id= NULL){
     if (!is_null($id)) {
    $this->id = $id;
@@ -152,7 +156,145 @@ class ModelPersonne {
         }
        }
        
+       public static function getAllPraticiensSpecialites() {
+        try {
+         $database = Model::getInstance();
+         $query = "SELECT p.id, p.nom, p.prenom, p.adresse, s.label FROM personne as p, specialite as s WHERE p.specialite_id = s.id AND p.statut=1 ORDER BY p.id";
+         $statement = $database->prepare($query);
+         $statement->execute();
+         $results = $statement->fetchAll();
+         return $results;
+        } 
+        catch (PDOException $e) {
+         printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+         return -1;
+        }
+       }
        
+       public static function getNbrPraticiensPatient() {
+        try {
+         $database = Model::getInstance();
+         $query = "SELECT p.id, p.nom, p.prenom, p.adresse, COUNT(rdv.praticien_id) FROM personne as p, rendezvous as rdv WHERE p.id=rdv.patient_id AND rdv.patient_id<>0 AND p.statut=2 GROUP BY rdv.patient_id";
+         $statement = $database->prepare($query);
+         $statement->execute();
+         $results = $statement->fetchAll();
+         return $results;
+        } 
+        catch (PDOException $e) {
+         printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+         return -1;
+        }
+       }
+       
+       public static function getPraticiens() {
+        try {
+         $database = Model::getInstance();
+         $query = "SELECT * FROM personne as p WHERE p.statut=1 ORDER BY p.id";
+         $statement = $database->prepare($query);
+         $statement->execute();
+         $results = $statement->fetchAll();
+         return $results;
+        } 
+        catch (PDOException $e) {
+         printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+         return -1;
+        }
+       }
+       
+       public static function getPatients() {
+        try {
+         $database = Model::getInstance();
+         $query = "SELECT * FROM personne as p WHERE p.statut=2 ORDER BY p.id";
+         $statement = $database->prepare($query);
+         $statement->execute();
+         $results = $statement->fetchAll();
+         return $results;
+        } 
+        catch (PDOException $e) {
+         printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+         return -1;
+        }
+       }
+       
+       public static function getAdministrateurs() {
+        try {
+         $database = Model::getInstance();
+         $query = "SELECT * FROM personne as p WHERE p.statut=0 ORDER BY p.id";
+         $statement = $database->prepare($query);
+         $statement->execute();
+         $results = $statement->fetchAll();
+         return $results;
+        } 
+        catch (PDOException $e) {
+         printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+         return -1;
+        }
+       }
+       
+       public static function getPatientToId($id) {
+        try {
+         $database = Model::getInstance();
+         $query = "select id, nom, prenom, adresse, login, password, statut, specialite_id from personne where id = :id;";
+         $statement = $database->prepare($query);
+         $statement->execute([
+            'id' => $id
+         ]);
+         $results = $statement->fetchAll();
+         return $results;
+        } catch (PDOException $e) {
+         printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+         return NULL;
+        }
+       }
+       
+       public static function getRdvToId($id) {
+        try {
+         $database = Model::getInstance();
+         $query = "SELECT personne.nom, personne.prenom, rendezvous.rdv_date FROM personne, rendezvous WHERE personne.id=rendezvous.praticien_id AND rendezvous.patient_id = :id ORDER BY rendezvous.rdv_date;";
+         $statement = $database->prepare($query);
+         $statement->execute([
+            'id' => $id
+         ]);
+         $results = $statement->fetchAll();
+         return $results;
+        } catch (PDOException $e) {
+         printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+         return NULL;
+        }
+       }
+       
+       public static function getNomsPraticiens() { 
+        try {
+            $database = Model::getInstance();
+            $query = "select id, nom, prenom from personne where statut = :statut";
+            $statement = $database->prepare($query);
+            $statement->execute([
+            'statut' => self::PRACTICIEN
+            ]);
+            $results = $statement->fetchAll();
+            return $results;
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
+        }
+       }
+       
+       
+       public static function getDispoPraticiensToId($id) {
+           try {
+            $database = Model::getInstance();
+            $query = "SELECT id, rdv_date FROM rendezvous WHERE patient_id=0 AND praticien_id = :id;";
+            $statement = $database->prepare($query);
+            $statement->execute([
+            'id' => $id
+            ]);
+            $results = $statement->fetchAll();
+            return $results;
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
+        }
+       }
 }
 ?>
 <!-- ----- fin modelPersonne -->

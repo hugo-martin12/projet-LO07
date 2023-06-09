@@ -3,6 +3,8 @@
 require ('../controller/ControllerDoctolib.php');
 require ('../controller/ControllerPraticien.php');
 require ('../controller/ControllerConnexion.php');
+require ('../controller/ControllerAdministrateur.php');
+require ('../controller/ControllerPatient.php');
 
 // --- récupération de l'action passée dans l'URL
 $query_string = $_SERVER['QUERY_STRING'];
@@ -34,7 +36,23 @@ switch ($action) {
  case "fonctionnaliteOriginale" :
   ControllerDoctolib::$action();
   break; 
-
+ case "adminListeSpecialites" :
+ case "adminSpecialiteReadId" :
+ case "adminSpecialiteReadOne" :
+ case "adminSpecialiteInsert" :
+ case "adminSpecialiteInserted" :
+ case "adminListePraticiens" :
+ case "adminNbrPraticiensPatient" :
+ case "adminInfo" : 
+   ControllerAdministrateur::$action();
+   break;
+ case "patientMonCompte" :
+ case "patientListeRdv" :
+ case "patientReadPraticiens" :
+ case "patientReadDispo" :
+ case "patientRdvInserted" :
+     ControllerPatient::$action();
+     break;
  default:
   $action = "doctolibAccueil";
   ControllerDoctolib::$action();

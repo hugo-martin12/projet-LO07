@@ -14,15 +14,15 @@
         $valeur = $currentUser[0]->getStatut();
         $nom = $currentUser[0]->getNom();
         $prenom = $currentUser[0]->getPrenom();
-        if($valeur == 0){
+        if($valeur == ModelPersonne::ADMINISTRATEUR){
            echo "<a class='navbar-brand' href='#'>Administrateur |</a>";
            echo "<a class='navbar-brand' href='#'>$nom $prenom |</a>";
         }
-        elseif ($valeur == 1) {
+        elseif ($valeur == ModelPersonne::PRACTICIEN) {
            echo "<a class='navbar-brand' href='#'>Praticien |</a>";
            echo "<a class='navbar-brand' href='#'>$nom $prenom |</a>"; 
         }
-        elseif ($valeur == 2) {
+        elseif ($valeur == ModelPersonne::PATIENT) {
            echo "<a class='navbar-brand' href='#'>Patient |</a>";
            echo "<a class='navbar-brand' href='#'>$nom $prenom |</a>"; 
         }
@@ -38,15 +38,22 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <?php
-        if($valeur == 0){
+        if($valeur == ModelPersonne::ADMINISTRATEUR){
            echo "<li class=\"nav-item dropdown\">";
            echo "<a class=\"nav-link dropdown-toggle\" role=\"button\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">administrateur</a>";
            echo"<ul class=\"dropdown-menu\">";
-                echo"<li><a class=\"dropdown-item\" href='router2.php?action=?'>???</a></li>";
+                echo"<li><a class=\"dropdown-item\" href='router2.php?action=adminListeSpecialites'>Liste des spécialités</a></li>";
+                echo"<li><a class=\"dropdown-item\" href='router2.php?action=adminSpecialiteReadId'>Sélection d'une spécialité par son id</a></li>";
+                echo"<li><a class=\"dropdown-item\" href='router2.php?action=adminSpecialiteInsert'>Insertion d'une nouvelle spécialité</a></li>";
+                echo"<li><hr class=\"dropdown-divider\"></li>";
+                echo"<li><a class=\"dropdown-item\" href='router2.php?action=adminListePraticiens'>Liste des praticiens avec leur spécialité</a></li>";
+                echo"<li><a class=\"dropdown-item\" href='router2.php?action=adminNbrPraticiensPatient'>Nombre de praticiens par patient</a></li>";
+                echo"<li><hr class=\"dropdown-divider\"></li>";
+                echo"<li><a class=\"dropdown-item\" href='router2.php?action=adminInfo'>Info</a></li>";
            echo "</ul>";
            echo "</li>";
         }
-        elseif ($valeur == 1) {
+        elseif ($valeur == ModelPersonne::PRACTICIEN) {
            echo "<li class=\"nav-item dropdown\">";
            echo "<a class=\"nav-link dropdown-toggle\" role=\"button\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">praticien</a>";
            echo"<ul class=\"dropdown-menu\">";
@@ -58,11 +65,13 @@
            echo "</ul>";
            echo "</li>";
         }
-        elseif ($valeur == 2) {
+        elseif ($valeur == ModelPersonne::PATIENT) {
            echo "<li class=\"nav-item dropdown\">";
            echo "<a class=\"nav-link dropdown-toggle\" role=\"button\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">patient</a>";
            echo"<ul class=\"dropdown-menu\">";
-                echo"<li><a class=\"dropdown-item\" href='router2.php?action=?'>???</a></li>";
+                echo"<li><a class=\"dropdown-item\" href='router2.php?action=patientMonCompte'>Mon compte</a></li>";
+                echo"<li><a class=\"dropdown-item\" href='router2.php?action=patientListeRdv'>Liste de mes rendez-vous</a></li>";
+                echo"<li><a class=\"dropdown-item\" href='router2.php?action=patientReadPraticiens'>Prendre un rdv avec un praticien</a></li>";
            echo "</ul>";
            echo "</li>"; 
         }
