@@ -11,8 +11,9 @@ class ControllerPatient {
         $currentUser = $_SESSION['currentUser'];
         $id = $currentUser[0]->getId();
         $results = ModelPersonne::getPatientToId($id);
+        $title = "Informations sur mon compte";
         include 'config.php';
-        $vue = $root . 'app/view/patient/viewMonCompte.php';
+        $vue = $root . 'app/view/generique/viewAll.php';
         if (DEBUG) {
             echo ("ControllerPatient : patientMonCompte : vue = $vue");
         }
@@ -25,8 +26,9 @@ class ControllerPatient {
         $currentUser = $_SESSION['currentUser'];
         $id = $currentUser[0]->getId();
         $results = ModelPersonne::getRdvToId($id);
+        $title = "Liste de mes rendez-vous";
         include 'config.php';
-        $vue = $root . 'app/view/patient/viewListeRdv.php';
+        $vue = $root . 'app/view/generique/viewAll.php';
         if (DEBUG) {
             echo ("ControllerPatient : patientListeRdv : vue = $vue");
         }
@@ -60,8 +62,9 @@ class ControllerPatient {
         $id_rdv = $_GET['rdv'];
         ModelRendezvous::addRdv($id_rdv, $id_patient);
         $results = ModelPersonne::getRdvToId($id_patient);
+        $title = "Liste de mes rendez-vous";
         include 'config.php';
-        $vue = $root . 'app/view/patient/viewListeRdv.php';
+        $vue = $root . 'app/view/generique/viewAll.php';
         if (DEBUG) {
             echo ("ControllerPatient : patientRdvInserted : vue = $vue");
         }
