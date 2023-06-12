@@ -25,6 +25,17 @@ class ControllerDoctolib {
    echo ("ControllerDoctolib : doctolibAccueil : vue = $vue");
   require ($vue);
  }
+ 
+  public static function ameliorationMVC() {
+     //permet d'afficher la page d'acceuil
+  session_start();
+  
+  include 'config.php';
+  $vue = $root . '/app/view/innovations/viewAmeliorationMVC.php';
+  if (DEBUG)
+   echo ("ControllerDoctolib : ameliorationMVC : vue = $vue");
+  require ($vue);
+ }
 }
 ?>
 <!-- ----- fin controllerDoctolib -->

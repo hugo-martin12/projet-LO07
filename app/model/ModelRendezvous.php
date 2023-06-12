@@ -41,11 +41,12 @@ class ModelRendezvous {
     public static function getAll() {
         try {
          $database = Model::getInstance();
-         $query = "SELECT rendezvous.id, rendezvous.rdv_date, p1.nom, p1.prenom, p2.nom, p2.prenom FROM rendezvous, personne AS p1, personne AS p2 WHERE rendezvous.patient_id = p1.id AND rendezvous.praticien_id=p2.id AND rendezvous.patient_id<>0";
+         $query = "SELECT rendezvous.id, rendezvous.rdv_date, p1.nom as n1, p1.prenom as p1, p2.nom as n2, p2.prenom as p2 FROM rendezvous, personne AS p1, personne AS p2 WHERE rendezvous.patient_id = p1.id AND rendezvous.praticien_id=p2.id AND rendezvous.patient_id<>0";
          $statement = $database->prepare($query);
          $statement->execute();
          $results = $statement->fetchAll(PDO::FETCH_ASSOC);
          $col = ["id", "date et heure", "nom du patient", "prénom du patient", "nom du praticien", "prénom du praticien"];
+         print_r($results);
          return [$col, $results];
         } 
         catch (PDOException $e) {

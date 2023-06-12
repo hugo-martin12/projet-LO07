@@ -80,7 +80,7 @@
           <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Innovations</a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href='router2.php?action=fonctionnaliteOriginale'>Fonctionnalité originale</a></li>
-            <li><a class="dropdown-item" href='router2.php?action=?'>Amélioration du code MVC</a></li>
+            <li><a class="dropdown-item" href='router2.php?action=ameliorationMVC'>Amélioration du code MVC</a></li>
           </ul>
         </li>
         

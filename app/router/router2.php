@@ -33,6 +33,7 @@ switch ($action) {
  case "praticienListePatients" :
   ControllerPraticien::$action();
   break;
+ case "ameliorationMVC";
  case "fonctionnaliteOriginale" :
   ControllerDoctolib::$action();
   break; 

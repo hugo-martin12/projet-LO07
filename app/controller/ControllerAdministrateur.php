@@ -106,6 +106,7 @@ class ControllerAdministrateur {
         $results4 = ModelPersonne::getAdministrateurs();
         $title4 = "Liste des administrateurs";
         $results5 = ModelRendezvous::getAll();
+        //print_r($results5);
         $title5 = "Liste des rdv";
         $results = [$results1, $results2, $results3, $results4, $results5];
         $title = [$title1, $title2, $title3, $title4, $title5];
