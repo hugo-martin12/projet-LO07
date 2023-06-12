@@ -144,7 +144,7 @@ class ModelPersonne {
        public static function getAllRDVGroupByPraticien() {
         try {
          $database = Model::getInstance();
-         $query = "SELECT p1.nom, p1.prenom, s.label, p2.nom, p2.prenom, r.rdv_date FROM personne as p1, specialite as s, personne as p2, rendezvous as r WHERE p1.id <> p2.id and p1.specialite_id = s.id and p1.id = r.praticien_id and p2.id = r.patient_id and p2.id <>0 GROUP BY p1.nom, p1.prenom, p2.nom, p2.prenom";
+         $query = "SELECT p1.nom, p1.prenom, s.label, p2.nom, p2.prenom, r.rdv_date FROM personne as p1, specialite as s, personne as p2, rendezvous as r WHERE p1.id <> p2.id and p1.specialite_id = s.id and p1.id = r.praticien_id and p2.id = r.patient_id and p2.id <>0 GROUP BY p1.nom, p1.prenom, p2.nom, p2.prenom, r.rdv_date";
          $statement = $database->prepare($query);
          $statement->execute();
          $results = $statement->fetchAll();

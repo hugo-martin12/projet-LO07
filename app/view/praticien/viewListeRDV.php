@@ -9,7 +9,7 @@
         
         <table class = "table table-striped table-bordered">
             <thead>
-              <tr>
+              <tr class="table-dark">
                 <th scope = "col">RDV</th>
                 <th scope = "col">Nom</th>
                 <th scope = "col">Prenom</th>
@@ -25,7 +25,7 @@
                     $nom = utf8_encode($nom);
                     $prenom = $element[2];
                     $prenom = utf8_encode($prenom);
-                 printf("<tr><td>%s</td><td>%s</td><td>%s</td></tr>", $rdv,$nom,$prenom);
+                 printf("<tr class=\"table-light\"><td>%s</td><td>%s</td><td>%s</td></tr>", $rdv,$nom,$prenom);
                 }
                 ?>
             </tbody>

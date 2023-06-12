@@ -15,8 +15,8 @@
         $valeur = $currentUser[0]->getStatut();
         if($valeur == 0){
             echo "<p>Ici on va avoir la liste des des patients et de leur rendez-vous group by le praticien responsable du rendez-vous. Pour faire ca Nous utilisons du renommage en sql pour afficher des inforamtions distincts du meme table. Ensuite pour clarifier grandement le resultat nous n'affichons pas les informations déjà aficher sur une ligne précedente. </p></br>";
-            echo "<table class = \"table table-striped table-bordered\">";
-            echo "<thead><tr>";
+            echo "<table class = \"table table-bordered\">";
+            echo "<thead class=\"table-dark\"><tr>";
                 echo "<th scope = \"col\">Nom et Prénom Praticien</th>";
                 echo "<th scope = \"col\">Spécialité</th>";
                 echo "<th scope = \"col\">Nom et Prénom Patient</th>";
@@ -25,6 +25,8 @@
                 
                 $tempPraticien = "";
                 $tempPatient = "";
+                $Listcolor = array("table-light","table-secondary");
+                $counter = 0;
                 foreach ($results as $element) {
                     
                     $nomPraticien = $element[0];
@@ -48,7 +50,7 @@
                     $currentPraticien = $nomPraticien . " " . $prenomPraticien;
                     $currentPatient = $nomPatient . " " . $prenomPatient;
                     if($currentPraticien == $tempPraticien){
-                       echo "<tr>";
+                       echo "<tr class=$color>";
                        echo "<td> </td>";
                        echo "<td> </td>";
                        if($currentPatient == $tempPatient){
@@ -63,12 +65,15 @@
                        echo "</tr>";
                     }
                     else{
-                      echo "<tr>";
+                      $color = $Listcolor[$counter % count($Listcolor)];
+                      echo "<tr class=$color>";
                       echo "<td> $currentPraticien </td>";
                       echo "<td> $specialitePraticien </td>";
                       echo "<td> $currentPatient </td>";
                       echo "<td> $rdv </td>";
                       echo "</tr>";
+                      
+                      $counter++;
                     }
                     
                     
@@ -77,7 +82,7 @@
                     
                  
                 }
-                echo "</tbody></table>";
+                echo "</tbody></table></br></br>";
         }
         else{
             echo "<p>Vous devez être administrateur pour voir ces données confidentielles</p></br>";
