@@ -34,8 +34,9 @@ class ModelSpecialite {
             $query = "select * from specialite";
             $statement = $database->prepare($query);
             $statement->execute();
-            $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelSpecialite");
-            return $results;
+            $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+            $col = ["id", "label"];
+            return [$col, $results];
         } catch (PDOException $e) {
             printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
             return NULL;
@@ -64,8 +65,9 @@ class ModelSpecialite {
             $statement->execute([
                 'id' => $id
             ]);
-            $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelSpecialite");
-            return $results;
+            $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+            $col = ["id", "label"];
+            return [$col, $results];
         } catch (PDOException $e) {
             printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
             return NULL;

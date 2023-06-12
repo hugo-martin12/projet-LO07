@@ -44,8 +44,9 @@ class ModelRendezvous {
          $query = "SELECT rendezvous.id, rendezvous.rdv_date, p1.nom, p1.prenom, p2.nom, p2.prenom FROM rendezvous, personne AS p1, personne AS p2 WHERE rendezvous.patient_id = p1.id AND rendezvous.praticien_id=p2.id AND rendezvous.patient_id<>0";
          $statement = $database->prepare($query);
          $statement->execute();
-         $results = $statement->fetchAll();
-         return $results;
+         $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+         $col = ["id", "date et heure", "nom du patient", "prénom du patient", "nom du praticien", "prénom du praticien"];
+         return [$col, $results];
         } 
         catch (PDOException $e) {
          printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
