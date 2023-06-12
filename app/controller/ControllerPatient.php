@@ -6,6 +6,7 @@ require_once '../model/ModelPersonne.php';
 class ControllerPatient {
     
     public static function patientMonCompte() {
+        //Permet d'afficher les informations sur le compte du patient
         session_start();
         $currentUser = $_SESSION['currentUser'];
         $id = $currentUser[0]->getId();
@@ -19,6 +20,7 @@ class ControllerPatient {
     }
     
     public static function patientListeRdv() {
+        //Permet d'afficher la liste des RDV
         session_start();
         $currentUser = $_SESSION['currentUser'];
         $id = $currentUser[0]->getId();
@@ -32,6 +34,7 @@ class ControllerPatient {
     }
     
     public static function patientReadPraticiens() {
+        //Permet d'afficher la view pour ajouter un RDV
         session_start();
         $results = ModelPersonne::getNomsPraticiens();
         include 'config.php';
@@ -40,6 +43,7 @@ class ControllerPatient {
     }
     
     public static function patientReadDispo() {
+        //Permet d'afficher les disponibilités du praticien selestionné
         session_start();
         $praticien = $_GET['praticien'];
         $results = ModelPersonne::getDispoPraticiensToId($praticien);
@@ -49,6 +53,7 @@ class ControllerPatient {
     }
     
     public static function patientRdvInserted() {
+        //Gere l'insersion d'un nouvel RDV
         session_start();
         $currentUser = $_SESSION['currentUser'];
         $id_patient = $currentUser[0]->getId();

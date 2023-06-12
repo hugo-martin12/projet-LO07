@@ -18,6 +18,7 @@ class ControllerAdministrateur {
     }
    
     public static function adminSpecialiteReadId() {
+        // Permet d'obtenir la liste des spécialités
         session_start();
         $results = ModelSpecialite::getAllId();
         include 'config.php';
@@ -26,6 +27,7 @@ class ControllerAdministrateur {
     }
    
     public static function adminSpecialiteReadOne() {
+        // Permet d'afficher une spécialité grace à son id
         session_start();
         $id = $_GET['id'];
         $results = ModelSpecialite::getOne($id);
@@ -36,6 +38,7 @@ class ControllerAdministrateur {
     }
    
     public static function adminSpecialiteInsert() {
+        // Permet d'afficher la vue pour inserer une spécialité
         session_start();
         include 'config.php';
         $vue = $root . 'app/view/administrateur/viewSpecialiteInsert.php';
@@ -46,8 +49,10 @@ class ControllerAdministrateur {
     }
    
     public static function adminSpecialiteInserted() {
+        // Gère l'affichage apres l'ajout ainsi que l'ajout dans la bd
         session_start();
-        $label = $_GET['label'];       
+        $label = $_GET['label'];
+        //verifie si la spécialité existe ou non
         $exist = ModelSpecialite::ifExisteSpecialite($label);
         $title = "La spécialité existe déjà !";
         if (!$exist){
@@ -64,6 +69,7 @@ class ControllerAdministrateur {
     }
 
     public static function adminListePraticiens() {
+        //Permet d'afficher la liste des praticiens 
         session_start();
         $results = ModelPersonne::getAllPraticiensSpecialites();
         $title = "Liste des praticiens";
@@ -76,6 +82,7 @@ class ControllerAdministrateur {
     }
     
     public static function adminNbrPraticiensPatient() {
+        //Permet d'afficher le nombre de praticien par patient
         session_start();
         $results = ModelPersonne::getNbrPraticiensPatient();
         $title = "Nombre de praticiens par patient";
@@ -88,6 +95,7 @@ class ControllerAdministrateur {
     }
     
     public static function adminInfo() {
+        //Permet d'afficher l'e nombre de praticien par patient l'ensemble des informations voulu 
         session_start();
         $results1 = ModelSpecialite::getAll();
         $title1 = "Liste des spécialités";
