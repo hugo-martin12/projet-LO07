@@ -7,6 +7,7 @@ require_once '../model/ModelPersonne.php';
 class ControllerPraticien {
     
   public static function praticienListeDispo() {
+    //permet d'afficher la liste des disponibilité 
     session_start();
     $currentUser = $_SESSION['currentUser'];
     $id = $currentUser[0]->getId();
@@ -19,6 +20,7 @@ class ControllerPraticien {
    }
    
   public static function praticienDispoInsert() {
+      //permet d'afficher la view pour creer une nouvelle disponibilité
     session_start();
     include 'config.php';
     $vue = $root . 'app/view/praticien/viewDispoInsert.php';
@@ -28,6 +30,7 @@ class ControllerPraticien {
    }
    
    public static function praticienDispoInserted() {
+       //permet d'informer sur l'ajout ou la présence d'une disponibilité
     session_start();
     $nbRdv = $_GET['nbRdv'];
     $LigneInserée = array();
@@ -36,12 +39,13 @@ class ControllerPraticien {
     $id_praticien = $currentUser[0]->getId();
     $heure = $_GET['heure'];
     $date = $_GET['date'];
-    
+    // traite le fait d'ajouter plusieurs disponibilité à la suite (en fonction du nombre choisi=>$rdv_date)
     for ($i = 1; $i <= $nbRdv; $i++) {
-        
+        //afin de mettre le bon format à l'horraire
         $rdv_date = $date." a ".$heure."h00";
-        
+        //vérifi si le RDV existe
         $exist = ModelRendezvous::ifExisteRDV($id_praticien,$rdv_date);
+        //Permet l'ajout dans un tableau spécifique en fonction de si une disponibilité à déjà été inseré ou non 
         if($exist){
           array_push($LigneDéjàInserée, $rdv_date);
         }
@@ -63,6 +67,7 @@ class ControllerPraticien {
    }
    
    public static function praticienListeRDV() {
+      //Permet d'afficher la liste des RDV
     session_start();
     $currentUser = $_SESSION['currentUser'];
     $id_praticien = $currentUser[0]->getId();
@@ -75,6 +80,7 @@ class ControllerPraticien {
    }
 
    public static function praticienListePatients() {
+       //PErmet d'afficher la liste des patients liés au praticien
     session_start();
     $currentUser = $_SESSION['currentUser'];
     $id_praticien = $currentUser[0]->getId();

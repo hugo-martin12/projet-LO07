@@ -5,6 +5,7 @@ require_once '../model/ModelPersonne.php';
 class ControllerDoctolib {
  // --- page d'acceuil
  public static function doctolibAccueil() {
+     //permet d'afficher la page d'acceuil
   session_start();
   
   include 'config.php';
@@ -15,6 +16,7 @@ class ControllerDoctolib {
  }
  
  public static function fonctionnaliteOriginale() {
+   //permet de gerer la fonctionnalite Originale
   session_start();
   $results = ModelPersonne::getAllRDVGroupByPraticien();
   include 'config.php';
