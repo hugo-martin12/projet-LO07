@@ -41,7 +41,8 @@ class ModelRendezvous {
     public static function getAll() {
         try {
          $database = Model::getInstance();
-         $query = "SELECT rendezvous.id, rendezvous.rdv_date, p1.nom as n1, p1.prenom as p1, p2.nom as n2, p2.prenom as p2 FROM rendezvous, personne AS p1, personne AS p2 WHERE rendezvous.patient_id = p1.id AND rendezvous.praticien_id=p2.id AND rendezvous.patient_id<>0";
+         $query = "SELECT rendezvous.id, rendezvous.rdv_date, p1.nom as nom1, p1.prenom as prenom1, p2.nom as nom2, p2.prenom as prenom2 FROM rendezvous, personne AS p1, personne AS p2 WHERE rendezvous.patient_id = p1.id AND rendezvous.praticien_id=p2.id AND rendezvous.patient_id<>0";
+
          $statement = $database->prepare($query);
          $statement->execute();
          $results = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -63,8 +64,9 @@ class ModelRendezvous {
          $statement->execute([
             'id_praticien' => $id_praticien
          ]);
-         $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelRendezvous");
-         return $results;
+         $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+         $col = ["Rendez-vous et horaire disponible"];
+         return [$col, $results];
         } 
         catch (PDOException $e) {
          printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
@@ -80,8 +82,9 @@ class ModelRendezvous {
          $statement->execute([
             'id_praticien' => $id_praticien
          ]);
-         $results = $statement->fetchAll();
-         return $results;
+         $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+         $col = ["RDV", "Nom", "Prénom"];
+         return [$col, $results];
         } 
         catch (PDOException $e) {
          printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
@@ -97,8 +100,9 @@ class ModelRendezvous {
          $statement->execute([
             'id_praticien' => $id_praticien
          ]);
-         $results = $statement->fetchAll();
-         return $results;
+         $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+         $col = ["Nom", "Prénom", "Adresse"];
+         return [$col, $results];
         } 
         catch (PDOException $e) {
          printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());

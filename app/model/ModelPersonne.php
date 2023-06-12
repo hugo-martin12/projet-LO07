@@ -244,8 +244,9 @@ class ModelPersonne {
          $statement->execute([
             'id' => $id
          ]);
-         $results = $statement->fetchAll();
-         return $results;
+         $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+         $col = ["id", "nom", "prénom", "adresse", "login", "password", "statut", "specialite_id"];
+         return [$col, $results];
         } catch (PDOException $e) {
          printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
          return NULL;
@@ -260,8 +261,9 @@ class ModelPersonne {
          $statement->execute([
             'id' => $id
          ]);
-         $results = $statement->fetchAll();
-         return $results;
+         $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+         $col = ["Nom", "Prénom", "Date et heure du RDV"];
+         return [$col, $results];
         } catch (PDOException $e) {
          printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
          return NULL;

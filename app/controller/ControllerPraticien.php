@@ -12,8 +12,9 @@ class ControllerPraticien {
     $currentUser = $_SESSION['currentUser'];
     $id = $currentUser[0]->getId();
     $results = ModelRendezvous::getListDispoToId($id);
+    $title = "Liste de mes disponibilités";
     include 'config.php';
-    $vue = $root . 'app/view/praticien/viewListeDispo.php';
+    $vue = $root . 'app/view/generique/viewAll.php';
     if (DEBUG)
      echo ("ControllerPraticien : praticienListeDispo : vue = $vue");
     require ($vue);
@@ -72,22 +73,23 @@ class ControllerPraticien {
     $currentUser = $_SESSION['currentUser'];
     $id_praticien = $currentUser[0]->getId();
     $results = ModelRendezvous::getListRDVToId($id_praticien);
+    $title = "Liste de mes rendez-vous";
     include 'config.php';
-    $vue = $root . 'app/view/praticien/viewListeRDV.php';
+    $vue = $root . 'app/view/generique/viewAll.php';
     if (DEBUG)
      echo ("ControllerPraticien : praticienListeRDV : vue = $vue");
     require ($vue);
    }
 
    public static function praticienListePatients() {
-       //PErmet d'afficher la liste des patients liés au praticien
+    //Permet d'afficher la liste des patients liés au praticien
     session_start();
     $currentUser = $_SESSION['currentUser'];
     $id_praticien = $currentUser[0]->getId();
     $results = ModelRendezvous::getListPatientToId($id_praticien);
-    
+    $title = "Liste de mes patients";
     include 'config.php';
-    $vue = $root . 'app/view/praticien/viewListePatients.php';
+    $vue = $root . 'app/view/generique/viewAll.php';
     if (DEBUG)
      echo ("ControllerPraticien : praticienListePatients : vue = $vue");
     require ($vue);
