@@ -17,31 +17,8 @@ require ($root . '/app/view/fragment/fragmentDoctolibHeader.html');
         <label style='width:8%' for="id">password : </label> <input type="password" name='password' size='15' style='margin:2px'> <br/>
       </div>
       <br/>
-      <button class="btn btn-primary" type="submit">GO</button>
+      <button class="btn btn-primary" type="submit">GO</button><br/>
     </form>
-    <h6>Tableau pour faciliter les connexions</h6> 
-          <table class="table">
-          <tr class="table">
-              <th>statut</th> 
-              <th>login</th>
-              <th>password</th>
-          </tr>
-          <tr class="table">
-              <td>administrateur</td> 
-              <td>boss1</td>
-              <td>secret</td>
-          </tr>
-          <tr class="table">
-              <td>praticien</td> 
-              <td>pare</td>
-              <td>secret</td>
-          </tr>
-          <tr class="table">
-              <td>patient</td> 
-              <td>depp</td>
-              <td>secret</td>
-          </tr>
-          </table>
 
   </div>
 

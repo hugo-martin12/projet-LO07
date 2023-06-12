@@ -47,7 +47,6 @@ class ModelRendezvous {
          $statement->execute();
          $results = $statement->fetchAll(PDO::FETCH_ASSOC);
          $col = ["id", "date et heure", "nom du patient", "prénom du patient", "nom du praticien", "prénom du praticien"];
-         print_r($results);
          return [$col, $results];
         } 
         catch (PDOException $e) {

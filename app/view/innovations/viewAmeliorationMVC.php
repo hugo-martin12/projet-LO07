@@ -15,7 +15,7 @@
           <li> les Noms des colonnes  → envoyés au controller par la fonction du modèle appelé</li>
           <li> les données  → envoyées au controller par la fonction du modèle appelé</li>
       </ul></br>
-      <p>Nous appelons donc viewAll.php en mettant dans notre controller c'est 3 informations clé pour notre amélioration  </p>
+      <p>Nous appelons donc viewAll.php en mettant dans notre controller ces 3 informations clés pour notre amélioration  </p></br>
   </div>
 
   <?php include $root . '/app/view/fragment/fragmentDoctolibFooter.html'; ?>
