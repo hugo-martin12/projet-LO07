@@ -7,8 +7,8 @@
       ?>
       <h3 style="color: red;">Affichage des patients et de leur rendez-vous par Praticien</h3><br/>
       <?php 
-        $currentUser = $_SESSION['currentUser'];
-        if($currentUser=="vide"){
+        $login = $_SESSION['login'];
+        if($login=="vide"){
             echo "<p>Vous devez être administrateur pour voir ces données confidentielles</p></br>";
         }
         else{    

@@ -5,7 +5,7 @@
       include $root . '/app/view/fragment/fragmentDoctolibMenu.php';
       include $root . '/app/view/fragment/fragmentDoctolibJumbotron.html';
       ?>
-      <p>Problème le login n'existe pas dans la base de donnée</p></br>
+      <p>Problème le login ou le mot de passe n'existe pas dans la base de donnée</p></br>
     <p/>
   </div>
 

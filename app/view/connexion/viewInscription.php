@@ -26,10 +26,12 @@
         <label>Votre spécialité si vous etes praticien :</label></br>
         <select name="specialite_id" class="form-select" >
             <?php
-                foreach ($results as $element) {
-                    $test = $element->getLabel();
-                    $test = utf8_encode($test);
-                 printf("<option value=%d >%s</option>", $element->getId(),$test);
+                foreach ($results[1] as $element) {
+                    
+                    $elem = $element["label"];
+                    $elem = utf8_encode($elem);
+                    $id = $element["id"];
+                 echo"<option value= $id >$elem</option>";
                 }
             ?>
             </select> 

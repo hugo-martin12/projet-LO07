@@ -15,8 +15,8 @@
         echo ("<li>login = " . $_GET['login'] . "</li>");
         echo ("<li>password = " . $_GET['password'] . "</li>");
         echo ("<li>statut = " . $sta . "</li>");
-        echo ("<li>specialite_id = " . $specialite_id . "</li>");
-        echo("</ul>");
+        echo ("<li>specialite_id = " . utf8_encode($specialite_id) . "</li>");
+        echo("</ul></br>");
       ?>
     <p/>
   </div>
